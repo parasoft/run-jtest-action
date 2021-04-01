@@ -1,0 +1,37 @@
+name: 'Run Jtest'
+description: 'A GitHub Action for running Parasoft Jtest analysis.'
+author: 'Parasoft'
+branding:
+  icon: 'aperture'
+  color: 'blue'
+inputs:
+  installDir:
+    description: 'Installation folder of Parasoft Jtest. If not specified, jtestcli executable will be searched on $PATH.'
+    required: false
+  workingDir:
+    description: 'Working directory for running Jtest.'
+    required: false
+    default: ${{ github.workspace }} 
+  testConfig:
+    description: 'Test configuration to be used when running code analysis.'
+    required: false
+    default: 'builtin://Recommended Rules'
+  reportDir:
+    description: 'Output folder for analysis reports.'
+    required: false
+    default: 'reports'
+  reportFormat:
+    description: 'Format of analysis reports.'
+    required: false
+    default: 'xml,html,sarif'
+  input:
+    description: 'Input scope for analysis - usually jtest.data.json'
+    required: false
+    default: 'jtest.data.json'
+  additionalParams:
+    description: 'Additional parameters for jtestcli executable.'
+    required: false
+    default: ''
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
