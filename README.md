@@ -85,7 +85,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job.
     steps:
     
-    # Generates the jtest.data.json input file
+    # Generates the jtest.data.json input file.
     - name: Create input for Jtest
       run: ./gradlew clean build jtest -I /path/to/jtest/integration/gradle/init.gradle "-Djtest.skip=true"
 
@@ -95,7 +95,7 @@ jobs:
       uses: parasoft/run-jtest-action@1.0.0
       with:
         #Uses the jtest.data.json generated with the Gradle command in the previous step
-        input: build/jtest/jtest.data.json  #required (build system dependent)
+        input: build/jtest/jtest.data.json
 
     # Uploads analysis results in the SARIF format, so that they are displayed as GitHub code scanning alerts.
     - name: Upload results (SARIF)
@@ -103,7 +103,7 @@ jobs:
         with:
             sarif_file: reports/report.sarif # reports is a default location for reports directory
 
-    # Uploads an archive that includes all report files (.xml, .html, .sarif)..
+    # Uploads an archive that includes all report files (.xml, .html, .sarif).
     - name: Archive reports
         uses: actions/upload-artifact@v2
         with:
@@ -140,7 +140,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job.
     steps:
     
-    # Generates the jtest.data.json input file
+    # Generates the jtest.data.json input file.
     - name: Create input for Jtest
       run: ./mvnw clean install jtest:jtest "-Djtest.skip=true" 
 
@@ -150,7 +150,7 @@ jobs:
       uses: parasoft/run-jtest-action@1.0.0
       with:
         #Uses the jtest.data.json generated with the Maven command in the previous step
-        input: build/jtest/jtest.data.json  #required (build system dependent)
+        input: build/jtest/jtest.data.json
 
     # Uploads analysis results in the SARIF format, so that they are displayed as GitHub code scanning alerts.
     - name: Upload results (SARIF)
@@ -158,7 +158,7 @@ jobs:
         with:
             sarif_file: reports/report.sarif # reports is a default location for reports directory
 
-    # Uploads an archive that includes all report files (.xml, .html, .sarif)..
+    # Uploads an archive that includes all report files (.xml, .html, .sarif).
     - name: Archive reports
         uses: actions/upload-artifact@v2
         with:
