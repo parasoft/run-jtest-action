@@ -117,7 +117,7 @@ jobs:
 ```yaml
 
 # This is a basic workflow to help you get started with the Run Jtest action.
-name: Jtest with Gradle
+name: Jtest with Maven
 
 on:
   # Trigger the workflow on push or pull request events but only for the master branch.
