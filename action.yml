@@ -1,35 +1,35 @@
-name: 'Run Jtest'
-description: 'A GitHub Action for running Parasoft Jtest analysis.'
+name: 'Run Parasoft Jtest'
+description: 'A GitHub Action for running Parasoft Jtest to ensure code quality and compliance with CWE, OWASP, and more.'
 author: 'Parasoft'
 branding:
   icon: 'aperture'
   color: 'blue'
 inputs:
   installDir:
-    description: 'Installation folder of Parasoft Jtest. If not specified, jtestcli executable will be searched on $PATH.'
+    description: 'Installation folder of Parasoft Jtest. If not specified, the cpptestcli executable must be added to PATH.'
     required: false
   workingDir:
     description: 'Working directory for running Jtest.'
     required: false
     default: ${{ github.workspace }} 
   testConfig:
-    description: 'Test configuration to be used when running code analysis.'
+    description: 'Test configuration to be used for code analysis.'
     required: false
     default: 'builtin://Recommended Rules'
   reportDir:
-    description: 'Output folder for analysis reports.'
+    description: 'Output folder for reports from code analysis.'
     required: false
     default: 'reports'
   reportFormat:
-    description: 'Format of analysis reports.'
+    description: 'Format of reports from code analysis.'
     required: false
     default: 'xml,html,sarif'
   input:
-    description: 'Input scope for analysis - usually jtest.data.json'
+    description: 'Input scope for analysis.'
     required: false
     default: 'jtest.data.json'
   additionalParams:
-    description: 'Additional parameters for jtestcli executable.'
+    description: 'Additional parameters for the jtestcli executable.'
     required: false
     default: ''
 runs:
