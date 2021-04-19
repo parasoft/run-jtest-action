@@ -47,7 +47,7 @@ See [Parasoft Jtest User Guide](https://docs.parasoft.com/display/JTEST20202/Run
 
 
 ### Uploading Analysis Results to GitHub
-By default, the Run Jtest action generates analysis reports in the SARIF, XML, and HTML format  (if you are using a Jtest version earlier than 2021.1, see [Generating SARIF Reports with Jtest 2020.2 or Earlier](#generating-sarif-reports-with-jtest-20202.2-or-earlier)).
+By default, the Run Jtest action generates analysis reports in the SARIF, XML, and HTML format  (if you are using a Jtest version earlier than 2021.1, see [Generating SARIF Reports with Jtest 2020.2 or Earlier](#generating-sarif-reports-with-jtest-20202-or-earlier)).
 
 When you upload the SARIF report to GitHub, the results will be presented as GitHub code scanning alerts. This allows you to review the results of code analysis with Parasoft Jtest directly on GitHub as part of your project. To upload the SARIF report to GitHub, modify your workflow by adding the `upload-sarif` action.
 
