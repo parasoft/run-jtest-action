@@ -205,7 +205,7 @@ To specify a test configuration directly in your workflow, add the `testConfig` 
     testConfig: 'builtin://Recommended Rules'
 ```
 
-#### Generating SARIF Reports Jtest 2020.2 or Earlier
+#### Generating SARIF Reports with Jtest 2020.2 or Earlier
 Generating reports in the SARIF format is available in Jtest since version 2021.1. If you are using an earlier Jtest version, you need to customize the `Run Jtest` action to enable generating SARIF reports:
 ```yaml
 - name: Run Jtest
