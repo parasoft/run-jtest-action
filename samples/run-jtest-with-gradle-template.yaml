@@ -1,0 +1,50 @@
+# This is a basic workflow to help you get started with the Run Jtest action.
+name: Jtest with Gradle
+
+on:
+  # Trigger the workflow on push or pull request events but only for the master branch.
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab.
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel.
+jobs:
+  build:
+    name: Analyze project with Jtest
+    
+    # Specifies the type of runner that the job will run on.
+    runs-on: self-hosted
+
+    # Steps represent a sequence of tasks that will be executed as part of the job.
+    steps:
+    
+    # Generates the jtest.data.json input file.
+    - name: Create input for Jtest
+      run: ./gradlew clean build jtest -I /path/to/jtest/integration/gradle/init.gradle "-Djtest.skip=true"
+
+    # Runs code analysis with Jtest.
+    - name: Run Jtest
+      id: jtest
+      uses: parasoft/run-jtest-action@1.0.0
+      with:
+        #Uses the jtest.data.json generated with the Gradle command in the previous step
+        input: build/jtest/jtest.data.json
+
+    # Uploads analysis results in the SARIF format, so that they are displayed as GitHub code scanning alerts.
+    - name: Upload results (SARIF)
+        if: always()
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+            sarif_file: reports/report.sarif # reports is a default location for reports directory
+
+    # Uploads an archive that includes all report files (.xml, .html, .sarif).
+    - name: Archive reports
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Static analysis reports
+          path: reports/*.*
