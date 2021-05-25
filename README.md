@@ -99,12 +99,14 @@ jobs:
 
     # Uploads analysis results in the SARIF format, so that they are displayed as GitHub code scanning alerts.
     - name: Upload results (SARIF)
+        if: always()
         uses: github/codeql-action/upload-sarif@v1
         with:
             sarif_file: reports/report.sarif # reports is a default location for reports directory
 
     # Uploads an archive that includes all report files (.xml, .html, .sarif).
     - name: Archive reports
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: Static analysis reports
@@ -154,12 +156,14 @@ jobs:
 
     # Uploads analysis results in the SARIF format, so that they are displayed as GitHub code scanning alerts.
     - name: Upload results (SARIF)
+        if: always()
         uses: github/codeql-action/upload-sarif@v1
         with:
             sarif_file: reports/report.sarif # reports is a default location for reports directory
 
     # Uploads an archive that includes all report files (.xml, .html, .sarif).
     - name: Archive reports
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: Static analysis reports
