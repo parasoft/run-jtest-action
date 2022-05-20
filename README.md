@@ -65,11 +65,11 @@ The following examples show simple workflows made up of one job for projects bui
 name: Jtest with Gradle
 
 on:
-  # Trigger the workflow on push or pull request events but only for the master branch.
+  # Trigger the workflow on push or pull request events but only for the main branch.
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
@@ -122,11 +122,11 @@ jobs:
 name: Jtest with Maven
 
 on:
-  # Trigger the workflow on push or pull request events but only for the master branch.
+  # Trigger the workflow on push or pull request events but only for the main branch.
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
