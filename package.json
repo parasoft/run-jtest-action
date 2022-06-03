@@ -1,6 +1,6 @@
 {
   "name": "run-jtest-action",
-  "version": "0.0.1b",
+  "version": "1.0.0",
   "private": true,
   "description": "A GitHub Action for running Parasoft Jtest analysis",
   "main": "lib/main.js",
