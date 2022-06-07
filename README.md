@@ -85,6 +85,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job.
     steps:
     
+    # Checks out your repository under $GITHUB_WORKSPACE, so that your job can access it.
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
     # Generates the jtest.data.json input file.
     - name: Create input for Jtest
       run: ./gradlew clean build jtest -I /path/to/jtest/integration/gradle/init.gradle "-Djtest.skip=true"
@@ -141,6 +145,10 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job.
     steps:
+    
+    # Checks out your repository under $GITHUB_WORKSPACE, so that your job can access it.
+    - name: Checkout repository
+      uses: actions/checkout@v2
     
     # Generates the jtest.data.json input file.
     - name: Create input for Jtest
