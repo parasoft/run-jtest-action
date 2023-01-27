@@ -27,7 +27,7 @@ export async function run() {
             core.info(messages.exit_code + outcome.exitCode);
         }
 
-    } catch (error) {
+    } catch (error: any) {
         core.error(messages.run_failed);
         core.error(error);
         core.setFailed(error.message);
