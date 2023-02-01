@@ -19,7 +19,7 @@ suite('run-jtest-action/runner', function() {
         const fsExistsSync = sandbox.fake.returns(false);
         sandbox.replace(fs, 'existsSync', fsExistsSync);
 
-        let runnerError : string | undefined;
+        let runnerError: string | Error | undefined | unknown;
         const incorrectWorkindDir = '/incorrect/working/dir';
         
         try {
@@ -43,7 +43,7 @@ suite('run-jtest-action/runner', function() {
             on: function(_event: string, action : any) {
                 action();
             }
-        });
+        } as any);
         sandbox.replace(cp, 'spawn', cpSpawn);
         let jtestcli = 'jtestcli';
         jtestcli = '"' + pt.join('/opt/parasoft/jtestcli', jtestcli) + '"';
