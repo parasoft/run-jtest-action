@@ -58,7 +58,7 @@ export class AnalysisRunner
             cliProcess.stderr?.on('data', (data) => { core.info(`${data}`.replace(/\s+$/g, '')); });
             cliProcess.on('close', (code) => {
                 const result : RunDetails = {
-                    exitCode : code,
+                    exitCode : (code != null) ? code : 150 // 150 = signal received
                 };
                 resolve(result);
             });
