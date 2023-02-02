@@ -79,6 +79,10 @@ jobs:
   build:
     name: Analyze project with Jtest
     
+    permissions:
+      # required for all workflows
+      security-events: write
+      
     # Specifies the type of runner that the job will run on.
     runs-on: self-hosted
 
@@ -139,6 +143,10 @@ on:
 jobs:
   build:
     name: Analyze project with Jtest
+    
+    permissions:
+      # required for all workflows
+      security-events: write
     
     # Specifies the type of runner that the job will run on.
     runs-on: self-hosted
