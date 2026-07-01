@@ -100,7 +100,7 @@ jobs:
     # Runs code analysis with Jtest.
     - name: Run Jtest
       id: jtest
-      uses: parasoft/run-jtest-action@2.0.3
+      uses: parasoft/run-jtest-action@2.0.4
       with:
         #Uses the jtest.data.json generated with the Gradle command in the previous step
         input: build/jtest/jtest.data.json
@@ -165,7 +165,7 @@ jobs:
     # Runs code analysis with Jtest
     - name: Run Jtest
       id: jtest
-      uses: parasoft/run-jtest-action@2.0.3
+      uses: parasoft/run-jtest-action@2.0.4
       with:
         #Uses the jtest.data.json generated with the Maven command in the previous step
         input: target/jtest/jtest.data.json
@@ -200,7 +200,7 @@ If `jtestcli` executable is not on `PATH`, you can configure the path to the ins
 
 ```yaml
 - name: Run Jtest
-  uses: parasoft/run-jtest-action@2.0.3
+  uses: parasoft/run-jtest-action@2.0.4
   with:
     installDir: '/opt/parasoft/jtest'
 ```
@@ -210,7 +210,7 @@ You can configure the `input` parameter to provide the path to a JSON file that 
 
 ```yaml
 - name: Run Jtest
-  uses: parasoft/run-jtest-action@2.0.3
+  uses: parasoft/run-jtest-action@2.0.4
   with:
     input: 'build/demo.data.json'
 ```
@@ -220,7 +220,7 @@ Code analysis with Jtest is performed by using a test configuration - a set of s
 To specify a test configuration directly in your workflow, add the `testConfig` parameter to the `Run Jtest` action and specify the URL of the test configuration you want to use:
 ```yaml
 - name: Run Jtest
-  uses: parasoft/run-jtest-action@2.0.3
+  uses: parasoft/run-jtest-action@2.0.4
   with:
     testConfig: 'builtin://Recommended Rules'
 ```
@@ -229,7 +229,7 @@ To specify a test configuration directly in your workflow, add the `testConfig` 
 Generating reports in the SARIF format is available in Jtest since version 2021.1. If you are using an earlier Jtest version, you need to customize the `Run Jtest` action to enable generating SARIF reports:
 ```yaml
 - name: Run Jtest
-  uses: parasoft/run-jtest-action@2.0.3
+  uses: parasoft/run-jtest-action@2.0.4
   with:
     reportFormat: xml,html,custom
     additionalParams: '-property report.custom.extension=sarif -property report.custom.xsl.file=${PARASOFT_SARIF_XSL}'
