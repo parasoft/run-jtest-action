@@ -8,7 +8,7 @@ This action enables you to run code analysis with Parasoft Jtest and review anal
 
 Parasoft Jtest is a testing tool that automates software quality practices for Java applications. It uses a comprehensive set of analysis techniques, including pattern-based static analysis, dataflow analysis, metrics, code coverage, and unit testing to help you verify code quality and ensure compliance with industry standards, such as CWE, OWASP, and CERT.
  - Request [a free trial](https://www.parasoft.com/products/parasoft-jtest/jtest-request-a-demo/) to receive access to Parasoft Jtest's features and capabilities.
- - See the [user guide](https://docs.parasoft.com/display/JTEST20202) for information about Parasoft Jtest's capabilities and usage.
+ - See the [user guide](https://docs.parasoft.com/display/JTEST20261) for information about Parasoft Jtest's capabilities and usage.
 
 Please visit the [official Parasoft website](http://www.parasoft.com) for more information about Parasoft Jtest and other Parasoft products.
 
@@ -43,7 +43,7 @@ Maven command line:
 - name: Generate JSON input file with Maven
   run: ./mvnw clean install jtest:jtest "-Djtest.skip=true"
 ```
-See [Parasoft Jtest User Guide](https://docs.parasoft.com/display/JTEST20202/Running+Static+Analysis+1) for details.
+See [Parasoft Jtest User Guide](https://docs.parasoft.com/display/JTEST20261/Running+Static+Analysis+1) for details.
 
 
 ### Uploading Analysis Results to GitHub
@@ -91,7 +91,7 @@ jobs:
     
     # Checks out your repository under $GITHUB_WORKSPACE, so that your job can access it.
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       
     # Generates the jtest.data.json input file.
     - name: Create input for Jtest
@@ -100,7 +100,7 @@ jobs:
     # Runs code analysis with Jtest.
     - name: Run Jtest
       id: jtest
-      uses: parasoft/run-jtest-action@2.0.2
+      uses: parasoft/run-jtest-action@2.0.3
       with:
         #Uses the jtest.data.json generated with the Gradle command in the previous step
         input: build/jtest/jtest.data.json
@@ -108,14 +108,14 @@ jobs:
     # Uploads analysis results in the SARIF format, so that they are displayed as GitHub code scanning alerts.
     - name: Upload results (SARIF)
       if: always()
-      uses: github/codeql-action/upload-sarif@v3
+      uses: github/codeql-action/upload-sarif@v4
       with:
         sarif_file: reports/report.sarif # reports is a default location for reports directory
 
     # Uploads an archive that includes all report files (.xml, .html, .sarif).
     - name: Archive reports
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: Static analysis reports
         path: reports/*.*
@@ -156,7 +156,7 @@ jobs:
     
     # Checks out your repository under $GITHUB_WORKSPACE, so that your job can access it.
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
     
     # Generates the jtest.data.json input file.
     - name: Create input for Jtest
@@ -165,7 +165,7 @@ jobs:
     # Runs code analysis with Jtest
     - name: Run Jtest
       id: jtest
-      uses: parasoft/run-jtest-action@2.0.2
+      uses: parasoft/run-jtest-action@2.0.3
       with:
         #Uses the jtest.data.json generated with the Maven command in the previous step
         input: target/jtest/jtest.data.json
@@ -173,14 +173,14 @@ jobs:
     # Uploads analysis results in the SARIF format, so that they are displayed as GitHub code scanning alerts.
     - name: Upload results (SARIF)
       if: always()
-      uses: github/codeql-action/upload-sarif@v3
+      uses: github/codeql-action/upload-sarif@v4
       with:
         sarif_file: reports/report.sarif # reports is a default location for reports directory
 
     # Uploads an archive that includes all report files (.xml, .html, .sarif).
     - name: Archive reports
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: Static analysis reports
         path: reports/*.*
@@ -190,7 +190,7 @@ jobs:
 ## Configuring Analysis with Jtest
 You can configure analysis with Parasoft Jtest in the following ways:
  - By customizing the `Run Jtest` action directly in your GitHub workflow. See [Action Parameters](#action-parameters) for a complete list of available parameters.
- - By configuring options directly in Parasoft Jtest tool. We recommend creating a jtestcli.properties file that includes all the configuration options and adding the file to Jtest's working directory - typically, the root directory of your repository. This allows Jtest to automatically read all the configuration options from that file. See [Parasoft Jtest User Guide](https://docs.parasoft.com/display/JTEST20202/Configuration+1) for details.
+ - By configuring options directly in Parasoft Jtest tool. We recommend creating a jtestcli.properties file that includes all the configuration options and adding the file to Jtest's working directory - typically, the root directory of your repository. This allows Jtest to automatically read all the configuration options from that file. See [Parasoft Jtest User Guide](https://docs.parasoft.com/display/JTEST20261/Configuration+1) for details.
 
 ### Examples
 This section includes practical examples of how the `Run Jtest` action can be customized directly in the YAML file of your workflow. 
@@ -200,27 +200,27 @@ If `jtestcli` executable is not on `PATH`, you can configure the path to the ins
 
 ```yaml
 - name: Run Jtest
-  uses: parasoft/run-jtest-action@2.0.2
+  uses: parasoft/run-jtest-action@2.0.3
   with:
     installDir: '/opt/parasoft/jtest'
 ```
 
 #### Defining the Scope for Analysis
-You can configure the `input` parameter to provide the path to a JSON file that defines the scope of analysis. [Parasoft Jtest User Guide](https://docs.parasoft.com/display/JTEST20202/Running+Static+Analysis+1) for details.
+You can configure the `input` parameter to provide the path to a JSON file that defines the scope of analysis. [Parasoft Jtest User Guide](https://docs.parasoft.com/display/JTEST20261/Running+Static+Analysis+1) for details.
 
 ```yaml
 - name: Run Jtest
-  uses: parasoft/run-jtest-action@2.0.2
+  uses: parasoft/run-jtest-action@2.0.3
   with:
     input: 'build/demo.data.json'
 ```
 
 #### Configuring a Jtest Test Configuration
-Code analysis with Jtest is performed by using a test configuration - a set of static analysis rules that enforce best coding practices or compliance guidelines. Parasoft Jtest ships with a wide range of [built-in test configurations](https://docs.parasoft.com/display/JTEST20202/Built-in+Test+Configurations).
+Code analysis with Jtest is performed by using a test configuration - a set of static analysis rules that enforce best coding practices or compliance guidelines. Parasoft Jtest ships with a wide range of [built-in test configurations](https://docs.parasoft.com/display/JTEST20261/Built-in+Test+Configurations).
 To specify a test configuration directly in your workflow, add the `testConfig` parameter to the `Run Jtest` action and specify the URL of the test configuration you want to use:
 ```yaml
 - name: Run Jtest
-  uses: parasoft/run-jtest-action@2.0.2
+  uses: parasoft/run-jtest-action@2.0.3
   with:
     testConfig: 'builtin://Recommended Rules'
 ```
@@ -229,7 +229,7 @@ To specify a test configuration directly in your workflow, add the `testConfig` 
 Generating reports in the SARIF format is available in Jtest since version 2021.1. If you are using an earlier Jtest version, you need to customize the `Run Jtest` action to enable generating SARIF reports:
 ```yaml
 - name: Run Jtest
-  uses: parasoft/run-jtest-action@2.0.2
+  uses: parasoft/run-jtest-action@2.0.3
   with:
     reportFormat: xml,html,custom
     additionalParams: '-property report.custom.extension=sarif -property report.custom.xsl.file=${PARASOFT_SARIF_XSL}'

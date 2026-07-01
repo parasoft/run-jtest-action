@@ -32,6 +32,9 @@ inputs:
     description: 'Additional parameters for the jtestcli executable.'
     required: false
     default: ''
+outputs:
+  exitCode:
+    description: 'Exit code from the Jtest analysis run.'
 runs:
-  using: 'node16'
+  using: 'node24'
   main: 'dist/index.js'

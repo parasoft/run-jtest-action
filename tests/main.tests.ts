@@ -13,6 +13,7 @@ suite('run-jtest-action/main', function() {
     let coreSetFailed : sinon.SinonSpy;
     let coreInfo : sinon.SinonSpy;
     let coreError : sinon.SinonSpy;
+    let coreSetOutput : sinon.SinonSpy;
 
     setup(function() {
         coreSetFailed = sandbox.fake();
@@ -21,6 +22,8 @@ suite('run-jtest-action/main', function() {
         sandbox.replace(core, 'info', coreInfo);
         coreError = sandbox.fake();
         sandbox.replace(core, 'error', coreError);
+        coreSetOutput = sandbox.fake();
+        sandbox.replace(core, 'setOutput', coreSetOutput);
     });
 
     teardown(function() {
@@ -35,6 +38,9 @@ suite('run-jtest-action/main', function() {
         await main.run();
 
         assert(coreSetFailed.notCalled);
+        assert(coreSetOutput.calledOnce);
+        assert.strictEqual(coreSetOutput.args[0][0], 'exitCode');
+        assert.strictEqual(coreSetOutput.args[0][1], `${runnerExitCode}`);
         assert(coreInfo.calledTwice);
         assert.strictEqual(coreInfo.args[1][0], messages.exit_code + `${runnerExitCode}`);
     });
